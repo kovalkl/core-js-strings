@@ -166,8 +166,12 @@ function removeFirstOccurrences(str, value) {
  *   removeLastOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeLastOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeLastOccurrences(str, value) {
+  const strReverse = str.split('').reverse().join('');
+  const valueReverse = value.split('').reverse().join('');
+  return str.indexOf(value) !== str.lastIndexOf(value)
+    ? strReverse.replace(valueReverse, '').split('').reverse().join('')
+    : str.replace(value, '');
 }
 
 /**
@@ -235,8 +239,10 @@ function endsWith(str, substr) {
  *   formatTime(0, 45) => "00:45"
  *   formatTime(0, 0) => "00:00"
  */
-function formatTime(/* minutes, seconds */) {
-  throw new Error('Not implemented');
+function formatTime(minutes, seconds) {
+  return `${minutes.toString().padStart(2, '0')}:${seconds
+    .toString()
+    .padStart(2, '0')}`;
 }
 
 /**
@@ -298,8 +304,21 @@ function containsSubstring(str, substring) {
  *   countVowels('aEiOu') => 5
  *   countVowels('XYZ') => 1
  */
-function countVowels(/* str */) {
-  throw new Error('Not implemented');
+function countVowels(str) {
+  let counter = 0;
+  for (let i = 0; i < str.length; i += 1) {
+    if (
+      str.toLowerCase()[i] === 'a' ||
+      str.toLowerCase()[i] === 'e' ||
+      str.toLowerCase()[i] === 'i' ||
+      str.toLowerCase()[i] === 'o' ||
+      str.toLowerCase()[i] === 'u' ||
+      str.toLowerCase()[i] === 'y'
+    ) {
+      counter += 1;
+    }
+  }
+  return counter;
 }
 
 /**
@@ -332,8 +351,10 @@ function isPalindrome(str) {
  *   findLongestWord('A long and winding road') => 'winding'
  *   findLongestWord('No words here') => 'words'
  */
-function findLongestWord(/* sentence */) {
-  throw new Error('Not implemented');
+function findLongestWord(sentence) {
+  const lengthArray = sentence.split(' ').map((el) => el.length);
+  const maxLength = lengthArray.indexOf(Math.max(...lengthArray));
+  return sentence.split(' ')[maxLength];
 }
 
 /**
@@ -346,8 +367,11 @@ function findLongestWord(/* sentence */) {
  *   reverseWords('Hello World') => 'olleH dlroW'
  *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
  */
-function reverseWords(/* str */) {
-  throw new Error('Not implemented');
+function reverseWords(str) {
+  return str
+    .split(' ')
+    .map((el) => el.split('').reverse().join(''))
+    .join(' ');
 }
 
 /**
@@ -361,8 +385,20 @@ function reverseWords(/* str */) {
  *   invertCase('JavaScript is Fun') => 'jAVAsCRIPT IS fUN'
  *   invertCase('12345') => '12345'
  */
-function invertCase(/* str */) {
-  throw new Error('Not implemented');
+function invertCase(str) {
+  return str
+    .split(' ')
+    .map((world) => {
+      return world
+        .split('')
+        .map((letter) => {
+          return letter === letter.toUpperCase()
+            ? letter.toLowerCase()
+            : letter.toUpperCase();
+        })
+        .join('');
+    })
+    .join(' ');
 }
 
 /**
@@ -392,8 +428,9 @@ function getStringFromTemplate(firstName, lastName) {
  *   extractNameFromTemplate('Hello, John Doe!') => 'John Doe'
  *   extractNameFromTemplate('Hello, Chuck Norris!') => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+function extractNameFromTemplate(value) {
+  const nameArray = value.slice(0, -1).split(' ');
+  return `${nameArray[1]} ${nameArray[2]}`;
 }
 
 /**
